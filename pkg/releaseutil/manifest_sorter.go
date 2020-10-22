@@ -17,6 +17,7 @@ limitations under the License.
 package releaseutil
 
 import (
+	"fmt"
 	"log"
 	"path"
 	"sort"
@@ -143,6 +144,12 @@ func (file *manifestFile) sort(result *result) error {
 
 		var entry SimpleHead
 		if err := yaml.Unmarshal([]byte(m), &entry); err != nil {
+			line := "----------------------------------------------------------------------"
+			fmt.Println(err.Error())
+			fmt.Println("raw yaml was:")
+			fmt.Println(line)
+			fmt.Println(m)
+			fmt.Println(line)
 			return errors.Wrapf(err, "YAML parse error on %s", file.path)
 		}
 
